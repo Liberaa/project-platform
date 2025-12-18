@@ -1,0 +1,261 @@
+/* ================================
+   Filters
+================================ */
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: var(--bg-card);
+  padding: 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.filters input,
+.filters select {
+  padding: 11px 12px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.filters input::placeholder {
+  color: var(--text-muted);
+}
+
+.filters input {
+  flex: 1;
+}
+
+.filters input:focus,
+.filters select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ================================
+   Project Grid
+================================ */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* ================================
+   Project Card
+================================ */
+.project-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* ================================
+   Thumbnail
+================================ */
+.project-thumbnail {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(
+    135deg,
+    #7aa2f7,
+    #5f7ddb,
+    #4b5aa5
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f1115;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* ================================
+   Project Info
+================================ */
+.project-info {
+  padding: 1.4rem;
+}
+
+.project-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.project-description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ================================
+   Meta & Tags
+================================ */
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tech-tag {
+  background: rgba(122, 162, 247, 0.15);
+  color: var(--accent);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(122, 162, 247, 0.25);
+}
+
+/* ================================
+   Pagination
+================================ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.pagination button {
+  padding: 8px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  color: var(--text-main);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.pagination button:hover {
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+}
+
+.pagination button.active {
+  background: linear-gradient(135deg, #7aa2f7, #5f7ddb);
+  color: #0f1115;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ================================
+   Loading State
+================================ */
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+}
+
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin-left: 10px;
+  border: 3px solid rgba(255,255,255,0.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* ================================
+   Empty State
+================================ */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+}
+
+.empty-state svg {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1rem;
+  opacity: 0.25;
+}
+
+
+/* ================================
+   VISIBILITY FIX PATCH
+   (does NOT change layout)
+================================ */
+
+/* Ensure grid is visible */
+.project-grid {
+  position: relative;
+  z-index: 1;
+}
+
+/* Force cards to be visible */
+.project-card {
+  background-color: #171a21 !important;
+  color: #e6eaf2 !important;
+  min-height: 1px;
+}
+
+/* Ensure text is readable */
+.project-title {
+  color: #ffffff !important;
+}
+
+.project-description {
+  color: #b8c0cc !important;
+}
+
+.project-meta {
+  color: #9aa4b2 !important;
+}
+
+/* Thumbnail fallback (if data image missing) */
+.project-thumbnail {
+  background-color: #2a2f3a !important;
+  color: #ffffff !important;
+}
+
+/* Make sure nothing is hidden */
+.project-card,
+.project-info {
+  overflow: visible !important;
+}
+
+
+.project-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

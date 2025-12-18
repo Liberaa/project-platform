@@ -1,0 +1,306 @@
+/* ================================
+   Root Theme Variables
+================================ */
+:root {
+  --bg-main: #0f1115;
+  --bg-card: #171a21;
+  --bg-soft: #1e222c;
+  --accent: #7aa2f7;
+  --accent-soft: rgba(122, 162, 247, 0.15);
+  --danger: #ff6b6b;
+
+  --text-main: #e6eaf2;
+  --text-muted: #9aa4b2;
+
+  --border-soft: rgba(255, 255, 255, 0.06);
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* ================================
+   Reset & Body
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text-main);
+  background: radial-gradient(circle at top, #151924, var(--bg-main));
+}
+
+/* ================================
+   Container
+================================ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ================================
+   Navbar
+================================ */
+.navbar {
+  background: rgba(15, 17, 21, 0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent);
+}
+
+/* ================================
+   Buttons
+================================ */
+button,
+.btn-primary {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #7aa2f7, #5f7ddb);
+  color: #0f1115;
+  font-weight: 500;
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+button:hover,
+.btn-primary:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+/* ================================
+   Forms
+================================ */
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 11px 12px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ================================
+   Auth
+================================ */
+.auth-container {
+  max-width: 420px;
+  margin: 60px auto;
+}
+
+.auth-form {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.auth-links {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.auth-links a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.error-message {
+  color: var(--danger);
+  margin-top: 1rem;
+  padding: 10px;
+  background: rgba(255, 107, 107, 0.15);
+  border-radius: 10px;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+}
+
+/* ================================
+   Upload
+================================ */
+.upload-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.upload-dropzone {
+  background: var(--bg-card);
+  border: 2px dashed rgba(122, 162, 247, 0.5);
+  border-radius: 16px;
+  padding: 3rem;
+  text-align: center;
+  transition: all 0.25s ease;
+  margin: 2rem 0;
+  color: var(--text-muted);
+}
+
+.upload-dropzone.dragover {
+  background: rgba(122, 162, 247, 0.1);
+  border-color: var(--accent);
+}
+
+.dropzone-content svg {
+  color: var(--accent);
+}
+
+.upload-progress {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-top: 2rem;
+  border: 1px solid var(--border-soft);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 18px;
+  background: var(--bg-soft);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #7aa2f7, #5f7ddb);
+  transition: width 0.3s;
+}
+
+/* ================================
+   Dashboard
+================================ */
+.dashboard {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.user-info,
+.my-projects,
+.admin-panel {
+  margin-bottom: 2rem;
+}
+
+.project-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.project-item {
+  background: var(--bg-soft);
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-soft);
+}
+
+.project-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+
+/* ================================
+   VISIBILITY FIX PATCH
+   (does NOT change layout)
+================================ */
+
+/* Ensure grid is visible */
+.project-grid {
+  position: relative;
+  z-index: 1;
+}
+
+/* Force cards to be visible */
+.project-card {
+  background-color: #171a21 !important;
+  color: #e6eaf2 !important;
+  min-height: 1px;
+}
+
+/* Ensure text is readable */
+.project-title {
+  color: #ffffff !important;
+}
+
+.project-description {
+  color: #b8c0cc !important;
+}
+
+.project-meta {
+  color: #9aa4b2 !important;
+}
+
+/* Thumbnail fallback (if data image missing) */
+.project-thumbnail {
+  background-color: #2a2f3a !important;
+  color: #ffffff !important;
+}
+
+/* Make sure nothing is hidden */
+.project-card,
+.project-info {
+  overflow: visible !important;
+}
+
+.project-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

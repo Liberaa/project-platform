@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1>Project Platform</h1>
+      <div class="nav-links">
+        <a href="/">Gallery</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="auth-container">
+      <div class="auth-form">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required>
+          </div>
+          <button type="submit" class="btn-primary">Login</button>
+        </form>
+        <div class="auth-links">
+          <p>Don't have an account? <a href="#" id="switchToRegister">Register</a></p>
+        </div>
+        <div id="errorMessage" class="error-message"></div>
+      </div>
+
+      <div class="auth-form" id="registerForm" style="display:none;">
+        <h2>Register</h2>
+        <form id="registerFormElement">
+          <div class="form-group">
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" required minlength="6">
+          </div>
+          <div class="form-group">
+            <label for="regConfirm">Confirm Password</label>
+            <input type="password" id="regConfirm" required>
+          </div>
+          <button type="submit" class="btn-primary">Register</button>
+        </form>
+        <div class="auth-links">
+          <p>Already have an account? <a href="#" id="switchToLogin">Login</a></p>
+        </div>
+        <div id="regErrorMessage" class="error-message"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/auth.js"></script>
+</body>
+</html>

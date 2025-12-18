@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project View</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/project.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1>Project Platform</h1>
+      <div class="nav-links">
+        <a href="/">Gallery</a>
+        <a href="/upload.html" id="uploadLink" style="display:none;">Upload</a>
+        <a href="/dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="project-container">
+    <div class="project-header">
+      <h2 id="projectTitle">Loading...</h2>
+      <div class="project-meta">
+        <span id="projectAuthor"></span>
+        <span id="projectDate"></span>
+        <span id="projectViews"></span>
+      </div>
+    </div>
+
+    <div class="project-content">
+      <div class="project-iframe-container">
+        <iframe id="projectFrame" sandbox="allow-scripts allow-same-origin allow-pointer-lock" loading="lazy">
+        </iframe>
+
+      </div>
+
+      <div class="project-sidebar">
+        <section class="project-description">
+          <h3>Description</h3>
+          <p id="projectDescription"></p>
+        </section>
+
+        <section class="project-tech">
+          <h3>Technologies</h3>
+          <div id="projectTech" class="tech-tags"></div>
+        </section>
+
+        <section class="project-controls">
+          <button id="fullscreenBtn">Fullscreen</button>
+          <button id="reloadBtn">Reload Project</button>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/project.js"></script>
+</body>
+
+</html>

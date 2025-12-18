@@ -1,0 +1,6 @@
+{
+  "title": "Your Project Title",
+  "description": "A brief description of what your project does",
+  "tech": ["JavaScript", "Canvas", "HTML5"],
+  "author": "your-email@example.com"
+}

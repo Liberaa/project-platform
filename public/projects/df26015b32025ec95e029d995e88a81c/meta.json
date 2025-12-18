@@ -1,0 +1,6 @@
+{
+  "title": "Canvas Click Counter",
+  "description": "A simple interactive canvas demo that counts clicks and displays them visually.",
+  "tech": ["JavaScript", "Canvas", "HTML5"],
+  "author": "brap@gmail.com"
+}

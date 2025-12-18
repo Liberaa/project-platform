@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Project</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1>Project Platform</h1>
+      <div class="nav-links">
+        <a href="/">Gallery</a>
+        <a href="/upload.html" class="active">Upload</a>
+        <a href="/dashboard.html">Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="upload-container">
+      <h2>Upload New Project</h2>
+      
+      <div class="upload-requirements">
+        <h3>Requirements:</h3>
+        <ul>
+          <li>ZIP file containing your project</li>
+          <li>Must include index.html and meta.json</li>
+          <li>Maximum file size: 10MB</li>
+          <li>Static files only (HTML, CSS, JS, images)</li>
+        </ul>
+      </div>
+
+      <div class="upload-dropzone" id="dropzone">
+        <div class="dropzone-content">
+          <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <p>Drag & drop your ZIP file here</p>
+          <p>or</p>
+          <button id="browseBtn">Browse Files</button>
+          <input type="file" id="fileInput" accept=".zip" hidden>
+        </div>
+      </div>
+
+      <div id="uploadProgress" class="upload-progress" style="display:none;">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p id="progressText">Uploading...</p>
+      </div>
+
+      <div id="uploadResult" class="upload-result" style="display:none;">
+        <!-- Results will be shown here -->
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/upload.js"></script>
+</body>
+</html>
