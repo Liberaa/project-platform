@@ -130,31 +130,6 @@ project.zip
 - `POST /api/upload` - Upload new project
 - `POST /api/upload/validate` - Validate ZIP structure
 
-## Development Phases
-
-### Phase 1 ✅ - Core System
-- Express app with MVC structure
-- MongoDB models and connections
-- Basic authentication
-- Project upload and validation
-- Iframe-based project rendering
-
-### Phase 2 - Creator Access
-- Enhanced dashboard
-- Bulk operations
-- Project analytics
-
-### Phase 3 - Polish
-- Advanced filtering
-- Project tags
-- Search functionality
-- Better error handling
-
-### Phase 4 - Documentation
-- API documentation
-- Creator guidelines
-- Security documentation
-
 ## Forbidden Files
 
 The following files/folders are rejected during upload:
