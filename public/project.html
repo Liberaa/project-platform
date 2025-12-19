@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project View</title>
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/project.css">
+
+  <!-- Global + Page CSS -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/project.css" />
 </head>
 
 <body>
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
       <h1>Project Platform</h1>
@@ -21,7 +23,10 @@
     </div>
   </nav>
 
+  <!-- Main Content -->
   <main class="project-container">
+
+    <!-- Project Header -->
     <div class="project-header">
       <h2 id="projectTitle">Loading...</h2>
       <div class="project-meta">
@@ -31,13 +36,19 @@
       </div>
     </div>
 
+    <!-- Project Grid -->
     <div class="project-content">
+      
+      <!-- Project Canvas -->
       <div class="project-iframe-container">
-        <iframe id="projectFrame" sandbox="allow-scripts allow-same-origin allow-pointer-lock" loading="lazy">
+        <iframe
+          id="projectFrame"
+          sandbox="allow-scripts allow-same-origin allow-pointer-lock"
+          loading="lazy">
         </iframe>
-
       </div>
 
+      <!-- Sidebar -->
       <div class="project-sidebar">
         <section class="project-description">
           <h3>Description</h3>
@@ -54,10 +65,38 @@
           <button id="reloadBtn">Reload Project</button>
         </section>
       </div>
+
     </div>
+
+    <!-- ✅ COMMENTS (FULL WIDTH, BELOW PROJECT) -->
+    <section class="project-comments">
+      <h3 class="comments-title">
+        Comments <span id="commentCount"></span>
+      </h3>
+
+      <div class="comment-form">
+        <textarea
+          id="commentInput"
+          maxlength="300"
+          placeholder="Add a comment..."
+        ></textarea>
+
+        <div class="comment-form-footer">
+          <span class="comment-hint">
+            Max 300 • 1 comment per minute
+          </span>
+          <button id="postCommentBtn" class="btn-primary">
+            Post
+          </button>
+        </div>
+      </div>
+
+      <div id="commentsList" class="comments-list"></div>
+    </section>
+
   </main>
 
+  <!-- JS -->
   <script src="/js/project.js"></script>
 </body>
-
 </html>

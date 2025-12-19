@@ -220,6 +220,8 @@ button:hover,
 /* ================================
    Dashboard
 ================================ */
+
+
 .dashboard {
   background: var(--bg-card);
   padding: 2rem;
@@ -253,6 +255,18 @@ button:hover,
 .project-actions {
   display: flex;
   gap: 0.5rem;
+}
+
+/* ================================
+   FIX: Action links behaving like links
+================================ */
+.project-actions a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-actions a:visited {
+  color: inherit;
 }
 
 

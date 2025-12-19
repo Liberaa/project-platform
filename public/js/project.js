@@ -17,10 +17,13 @@ class ProjectViewer {
     return params.get('id');
   }
 
-  async init() {
-    await this.loadProject();
-    this.attachEventListeners();
-  }
+async init() {
+  await this.loadProject();
+  await this.loadComments();
+  this.attachEventListeners();
+}
+
+
 
   async loadProject() {
     try {
@@ -110,6 +113,13 @@ class ProjectViewer {
         this.exitFullscreen();
       }
     });
+
+const postBtn = document.getElementById('postCommentBtn');
+if (postBtn) {
+  postBtn.addEventListener('click', () => this.postComment());
+}
+
+
   }
 
   toggleFullscreen() {
@@ -163,6 +173,72 @@ class ProjectViewer {
       frame.onload = () => loadingOverlay.remove();
     }, 100);
   }
+
+    /* ================================
+     Comments
+  ================================ */
+async loadComments() {
+  const container = document.getElementById('commentsList');
+  const countEl = document.getElementById('commentCount');
+  if (!container) return;
+
+  const res = await fetch(`/api/projects/${this.projectId}/comments`);
+  const comments = await res.json();
+
+  countEl.textContent = `(${comments.length})`;
+
+  if (comments.length === 0) {
+    container.innerHTML = '<p class="muted">No comments yet. Be the first.</p>';
+    return;
+  }
+
+  container.innerHTML = comments.map(c => `
+    <div class="comment">
+      <div class="comment-meta">
+        <span class="comment-author">
+          ${this.escapeHtml(c.userId.email)}
+        </span>
+        <span class="comment-date">
+          ${new Date(c.createdAt).toLocaleString()}
+        </span>
+      </div>
+      <div class="comment-content">
+        ${this.escapeHtml(c.content)}
+      </div>
+    </div>
+  `).join('');
+}
+
+  async postComment() {
+    const input = document.getElementById('commentInput');
+    const content = input.value.trim();
+    if (!content) return;
+
+    const token = localStorage.getItem('token');
+
+    try {
+      const res = await fetch(`/api/projects/${this.projectId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ content })
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        alert(err.message || 'Failed to post comment');
+        return;
+      }
+
+      input.value = '';
+      this.loadComments();
+    } catch (err) {
+      alert('Network error');
+    }
+  }
+
 
   showError(message) {
     const container = document.querySelector('.project-container');

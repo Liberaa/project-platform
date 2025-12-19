@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const helmet = require('helmet');
+const commentRoutes = require('./routes/comment.routes');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -55,6 +56,7 @@ app.set('views', path.join(__dirname, '../views'));
 
 
 // Routes
+app.use('/api', commentRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/upload', uploadRoutes);
