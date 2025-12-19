@@ -70,7 +70,7 @@ class DashboardManager {
           </small>
         </div>
         <div class="project-actions">
-          <a href="/project.html?id=${project._id}" class="btn-small">View</a>
+          <a href="/project.html?id=${project._id}" class="btn-small">Views</a>
 
           <button class="btn-small edit-btn" data-id="${project._id}">
             Edit
