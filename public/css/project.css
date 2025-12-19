@@ -295,7 +295,10 @@ body {
   font-weight: 400;
 }
 
-/* Comment Form */
+/* ================================
+   Comment Form
+================================ */
+
 .comment-form {
   background: var(--bg-card);
   border: 1px solid var(--border-soft);
@@ -328,28 +331,42 @@ body {
   color: var(--text-muted);
 }
 
-/* Comment list */
+/* ================================
+   Comment List
+================================ */
+
 .comments-list {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
 }
 
-.comment {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+/* Individual Comment Card */
+.comment-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem;
+  box-shadow: var(--shadow-soft);
+  transition: border-color 0.15s ease;
 }
 
-.comment-meta {
+.comment-card:hover {
+  border-color: rgba(122, 162, 247, 0.25);
+}
+
+/* Header */
+.comment-header {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.75rem;
   align-items: center;
+  margin-bottom: 0.4rem;
 }
 
 .comment-author {
   font-weight: 600;
   font-size: 0.9rem;
+  color: var(--text-main);
 }
 
 .comment-date {
@@ -357,8 +374,113 @@ body {
   color: var(--text-muted);
 }
 
+/* Content */
 .comment-content {
   font-size: 0.9rem;
   line-height: 1.6;
   color: var(--text-main);
+  white-space: pre-wrap;
+}
+
+
+/* ================================
+   Comment Edit Mode
+================================ */
+
+.comment-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.comment-edit-input {
+  width: 100%;
+  min-height: 60px;
+  resize: vertical;
+
+  background: var(--bg-soft);
+  color: var(--text-main);
+
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+
+  font-size: 0.9rem;
+  line-height: 1.6;
+  outline: none;
+}
+
+.comment-edit-input:focus {
+  border-color: var(--accent);
+}
+
+.comment-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Buttons */
+.comment-edit-actions .save {
+  background: linear-gradient(135deg, #7aa2f7, #5f7ddb);
+  color: #0f1115;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.comment-edit-actions .cancel {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.comment-edit-actions .cancel:hover {
+  color: var(--text-main);
+}
+
+
+/* ================================
+   Comment Action Buttons
+================================ */
+.comment-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.comment-actions button {
+  background: linear-gradient(135deg, #7aa2f7, #5f7ddb);
+  color: #0f1115;
+
+  border: none;
+  padding: 6px 14px;
+  border-radius: 10px;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.comment-actions button:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+/* Delete = outlined blue (still calm, not red) */
+.comment-actions .comment-delete {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid rgba(122, 162, 247, 0.45);
+}
+
+.comment-actions .comment-delete:hover {
+  background: rgba(122, 162, 247, 0.15);
 }

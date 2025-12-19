@@ -3,6 +3,9 @@ const Project = require('../models/Project');
 
 class CommentController {
 
+  /* ================================
+     Get comments for a project
+  ================================ */
   async getComments(req, res) {
     const { projectId } = req.params;
 
@@ -16,6 +19,9 @@ class CommentController {
     res.json(comments);
   }
 
+  /* ================================
+     Create comment
+  ================================ */
   async createComment(req, res) {
     const { projectId } = req.params;
     const { content } = req.body;
@@ -46,21 +52,52 @@ class CommentController {
     res.status(201).json(comment);
   }
 
-  async deleteComment(req, res) {
-    const { commentId } = req.params;
+  /* ================================
+     Edit comment (author only)
+  ================================ */
+  async editComment(req, res) {
+    const { id } = req.params;
+    const { content } = req.body;
 
-    const comment = await Comment.findById(commentId);
-    if (!comment) {
+    if (!content || content.length > 300) {
+      return res.status(400).json({ message: 'Invalid comment length' });
+    }
+
+    const comment = await Comment.findById(id);
+    if (!comment || comment.deleted) {
+      return res.status(404).json({ message: 'Comment not found' });
+    }
+
+    // Only author can edit
+    if (!comment.userId.equals(req.user._id)) {
+      return res.status(403).json({ message: 'Not allowed' });
+    }
+
+    comment.content = content;
+    await comment.save();
+
+    res.json(comment);
+  }
+
+  /* ================================
+     Delete comment
+     (author, project owner, or admin)
+  ================================ */
+  async deleteComment(req, res) {
+    const { id } = req.params;
+
+    const comment = await Comment.findById(id);
+    if (!comment || comment.deleted) {
       return res.status(404).json({ message: 'Comment not found' });
     }
 
     const project = await Project.findById(comment.projectId);
 
     const isAdmin = req.user.role === 'admin';
-    const isOwner = project?.ownerId.equals(req.user._id);
     const isAuthor = comment.userId.equals(req.user._id);
+    const isProjectOwner = project?.ownerId.equals(req.user._id);
 
-    if (!isAdmin && !isOwner && !isAuthor) {
+    if (!isAdmin && !isAuthor && !isProjectOwner) {
       return res.status(403).json({ message: 'Not allowed' });
     }
 

@@ -14,6 +14,11 @@ const commentLimiter = rateLimit({
 // Public
 router.get('/projects/:projectId/comments', commentController.getComments);
 
+router.put(
+  '/comments/:id',
+  authMiddleware,
+  commentController.editComment
+);
 // Authenticated
 router.post(
   '/projects/:projectId/comments',
@@ -23,7 +28,7 @@ router.post(
 );
 
 router.delete(
-  '/comments/:commentId',
+  '/comments/:id',
   authMiddleware,
   commentController.deleteComment
 );

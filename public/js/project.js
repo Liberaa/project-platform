@@ -185,6 +185,9 @@ async loadComments() {
   const res = await fetch(`/api/projects/${this.projectId}/comments`);
   const comments = await res.json();
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const userId = user?.id;
+
   countEl.textContent = `(${comments.length})`;
 
   if (comments.length === 0) {
@@ -192,22 +195,37 @@ async loadComments() {
     return;
   }
 
-  container.innerHTML = comments.map(c => `
-    <div class="comment">
-      <div class="comment-meta">
-        <span class="comment-author">
-          ${this.escapeHtml(c.userId.email)}
-        </span>
-        <span class="comment-date">
-          ${new Date(c.createdAt).toLocaleString()}
-        </span>
+  container.innerHTML = comments.map(c => {
+    const isAuthor = userId && c.userId._id === userId;
+
+    return `
+      <div class="comment-card" data-id="${c._id}">
+        <div class="comment-header">
+          <span class="comment-author">
+            ${this.escapeHtml(c.userId.email)}
+          </span>
+          <span class="comment-date">
+            ${new Date(c.createdAt).toLocaleString()}
+          </span>
+
+          ${isAuthor ? `
+            <div class="comment-actions">
+              <button class="comment-edit">Edit</button>
+              <button class="comment-delete">Delete</button>
+            </div>
+          ` : ''}
+        </div>
+
+        <div class="comment-content">
+          ${this.escapeHtml(c.content)}
+        </div>
       </div>
-      <div class="comment-content">
-        ${this.escapeHtml(c.content)}
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
+
+  this.attachCommentActions();
 }
+
 
   async postComment() {
     const input = document.getElementById('commentInput');
@@ -256,6 +274,91 @@ async loadComments() {
     div.textContent = text;
     return div.innerHTML;
   }
+
+attachCommentActions() {
+  document.querySelectorAll('.comment-delete').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = e.target.closest('.comment-card').dataset.id;
+      this.deleteComment(id);
+    });
+  });
+
+  document.querySelectorAll('.comment-edit').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const card = e.target.closest('.comment-card');
+      const id = card.dataset.id;
+      const contentEl = card.querySelector('.comment-content');
+      this.startEditComment(id, contentEl);
+    });
+  });
+}
+
+startEditComment(commentId, contentEl) {
+  if (contentEl.querySelector('.comment-edit')) return;
+
+  const original = contentEl.textContent.trim();
+
+  contentEl.innerHTML = `
+    <div class="comment-edit">
+      <textarea class="comment-edit-input">${original}</textarea>
+      <div class="comment-edit-actions">
+        <button class="save">Save</button>
+        <button class="cancel">Cancel</button>
+      </div>
+    </div>
+  `;
+
+
+
+  contentEl.querySelector('.cancel').onclick = () => {
+    contentEl.textContent = original;
+  };
+
+  contentEl.querySelector('.save').onclick = async () => {
+    const newContent = contentEl.querySelector('textarea').value.trim();
+    if (!newContent) return;
+
+    const token = localStorage.getItem('token');
+
+    const res = await fetch(`/api/comments/${commentId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ content: newContent })
+    });
+
+    if (!res.ok) {
+      alert('Failed to edit comment');
+      return;
+    }
+
+    this.loadComments();
+  };
+}
+
+async deleteComment(commentId) {
+  if (!confirm('Delete this comment?')) return;
+
+  const token = localStorage.getItem('token');
+
+  const res = await fetch(`/api/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  if (!res.ok) {
+    alert('Failed to delete comment');
+    return;
+  }
+
+  this.loadComments();
+}
+
+
 }
 
 // Initialize viewer when DOM is ready
